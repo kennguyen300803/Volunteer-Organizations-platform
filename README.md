@@ -67,7 +67,4 @@ http://localhost:8080
 ### **Google Login Issue**
 If login with Google is not working, it is because that email isn't registered in the database yet. Try signing up with the email before attempting to log in.
 
-### **Git Auto Sync**
-Auto commit/push/sync to GitHub is disabled by default in this template repository. Enable the GitDoc extension to use this functionality (either in your VSCode settings or in the Dev Container settings).
-
 
