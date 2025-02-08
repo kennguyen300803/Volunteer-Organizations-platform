@@ -38,8 +38,7 @@ http://localhost:8080
 
 ## 🛠️ Troubleshooting
 ### Database Connection Issues
-- Ensure MySQL is running and accessible.
-- Check `.env` database credentials.
+- Ensure MySQL and Docker is running and accessible.
 - Verify that `dtbs.sql` was imported correctly.
 
 ### Docker Issues
