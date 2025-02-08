@@ -20,17 +20,6 @@ Before starting the server, the database must be initialized.
    mysql -u root -p dtbs < dtbs.sql
    ```
 
-## Setting Up the Environment Variables
-Create a `.env` file in the root directory and add the following:
-```
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=dtbs
-SESSION_SECRET=your_secret_key_here
-```
-Adjust the database credentials if needed.
-
 ## Running the Server
 ```sh
 # Install dependencies
