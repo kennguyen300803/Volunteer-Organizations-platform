@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="stylesheets/admin_page.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <section class="sidebar">
+        <ul>
+            <li><a href="#" onclick="showContent('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showContent('manageUsers')">Manage People</a></li>
+            <li><a href="#" onclick="showContent('manageBranches')">Manage Branch</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </section>
+
+    <div id="vueAdmin" class="main-content">
+        <div id="dashboard" class="content-section active">
+            <div class="section">
+                <h1 class="section-header">Key Metrics</h1>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>Total Branches</h3>
+                        <p>{{ counts.branch }}</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Total Managers</h3>
+                        <p>{{ counts.manager }}</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Total Events</h3>
+                        <p>{{ counts.event }}</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Total Users</h3>
+                        <p>{{ counts.user }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <br>
+                <h1 class="section-header">User Database</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Region</th>
+                            <th>DOB</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="x in userList">
+                            <td>{{ x.firstName }} {{ x.lastName }}</td>
+                            <td>{{ x.isAdmin ? "Admin" : x.isManager ? "Manager" : "User" }}</td>
+                            <td>{{ x.branchName ? x.branchName : "N/A" }}</td>
+                            <td>{{ x.DOB }}</td>
+                            <td>{{ x.email }}</td>
+                            <td>{{ x.phonenumber }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="manageUsers" class="content-section">
+            <div class="container">
+                <h1>User Management</h1>
+                <h2>Add New User</h2>
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input v-model="newUser.firstName" type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input v-model="newUser.lastName" type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userRole">Role:</label>
+                        <select v-model="newUser.role" id="userRole" name="userRole" required>
+                            <option value="">Select Role</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email:</label>
+                        <input v-model="newUser.email" type="email" id="userEmail" name="userEmail" required>
+                    </div>
+                    <button v-on:click="addUser" type="button">Add User</button>
+                </form>
+
+                <h2>Existing Users</h2>
+                <div class="search-bar">
+                    <input v-model="searchTerm" v-on:keyup.enter="searchUser" type="text" id="userSearch" placeholder="Search...">
+                </div>
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Promotion</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="x in filteredList">
+                            <td>{{ x.firstName }} {{x.lastName}}</td>
+                            <td>{{ x.email }}</td>
+                            <td>{{ x.isAdmin ? "Admin" : x.isManager ? "Manager" : "User" }}</td>
+                            <td>
+                                <button v-on:click="promoteUser(x)" type="button">Promote</button>
+                            </td>
+                            <td>
+                                <button class="delete" v-on:click="deleteUser(x)" type="button">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div id="manageBranches" class="content-section">
+            <h1>Branch Management</h1>
+            <h2>Create New Branch</h2>
+                <div id="branch" class="container">
+                    <div class="row">
+                        <iframe
+                        class="map"
+                        title="Google Maps view of The University of Adelaide"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52331.49032203027!2d138.5978581122823!3d-34.93860513400345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ab0ced27ef95329%3A0xb46ee5f583fae2bf!2sThe%20University%20of%20Adelaide!5e0!3m2!1sen!2sau!4v1717235142284!5m2!1sen!2sau"
+                        width="600"
+                        height="490"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+
+                        <form action="#" class="input-class">
+                            <div class="form-group">
+                            <label for="state">States of Australia:</label>
+                            <select v-model="newBranch.state" id="state" name="state" required>
+                                <option value="">Select State</option>
+                                <option value="NSW">New South Wales</option>
+                                <option value="VIC">Victoria</option>
+                                <option value="QLD">Queensland</option>
+                                <option value="WA">Western Australia</option>
+                                <option value="SA">South Australia</option>
+                                <option value="TAS">Tasmania</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="areaOfOperation">Manager:</label>
+                            <select v-model="newBranch.manager" id="manager_assigned" name="manager_assigned" required>
+                                <option value="">Select Manager</option>
+                                <option v-for="x in managerList" :key="index" v-bind:value="x.userID">{{ x.firstName }} {{ x.lastName }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            <input v-model="newBranch.location" type="text" id="location" name="location" required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="objectives">Objectives:</label>
+                            <textarea v-model="newBranch.objectives" id="objectives" name="objectives" rows="4" required></textarea>
+                        </div> -->
+                        <button v-on:click="createBranch" type="button" class="btn">Create Branch</button>
+                    </form>
+                    </div>
+
+                <h2>Existing Branches</h2>
+                <table id="branchesTable">
+                    <thead>
+                        <tr>
+                            <th>State</th>
+                            <th>Location</th>
+                            <th>Branch Manager</th>
+                            <!-- <th>Objectives</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Branch entries will go here -->
+                        <tr v-for="x in branchList">
+                            <td>{{ x.branchName }}</td>
+                            <td>{{ x.branchAddress }}</td>
+                            <td>{{ x.firstName }} {{ x.lastName }}</td>
+                            <!-- <td>Placeholder for objectives</td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/admin_page.js"></script>
+</body>
+</html>
