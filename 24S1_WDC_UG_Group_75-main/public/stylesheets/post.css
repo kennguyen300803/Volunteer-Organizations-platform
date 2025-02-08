@@ -1,0 +1,216 @@
+#main-background{
+    min-height: 100vh;
+    width:auto;
+    min-width:0%; /* seems to fix scaling issue ??? */
+    height:100%;
+    background-image:
+    linear-gradient(rgba(2, 5, 17, 0.7), rgba(2, 6, 19, 0.7)),
+    url('../images/2.png');
+    /*https://wallpaper.mob.org/image/anime-girl-black_white-cyberpunk-1041426.html*/
+    background-size: cover;
+
+}
+
+.container {
+    padding-top:30px;
+    padding-bottom: 30px;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post {
+    width: 600px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+}
+
+.post .create-post textarea {
+    width: 96%;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    border-style: hidden;
+    background: #eee;
+}
+
+.post .post-top {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.post .post-top .post-info {
+    margin-left: 10px;
+    font-weight: bold;
+    transform: translate(-9px, 0px);
+}
+
+.post .post-top .post-info .name {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 33px;
+}
+
+.post .post-top .post-info .time {
+    font-size: 12px;
+}
+
+.post .post-top i {
+    margin-left: auto;
+    cursor: pointer;
+    padding-right: 15px;
+}
+
+.post .post-content {
+    padding: 10px;
+}
+
+.post .post-content img {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.post .post-bottom {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+}
+
+.post .action {
+    padding: 10px;
+    border-radius: 10px;
+    transition: .3s ease-in;
+    cursor: pointer;
+}
+
+.post .action:hover {
+    background: #eee;
+}
+
+.create .post-bottom {
+    justify-content: space-between;
+}
+
+.create .post-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.create .post-area .post_button {
+    padding: 5px 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create .post-area .post_button:hover {
+    background-color: #0056b3;
+}
+
+/* Dropdown menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 60px;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#setting-dropdown-header{
+  right: 0px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+.create-post {
+    padding: 10px;
+    margin: 10px;
+}
+
+.create-post h1, label{
+    margin-top: 0;
+}
+
+
+.create-post form {
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.post_button{
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: #f5f4fa;
+    background-color: #1c92aa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+.post_button:hover{
+    background-color: #115664;
+  }
+
+
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+
+  .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+input, select{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background: #e4e4e4;
+}

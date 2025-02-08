@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Page - NSW</title>
+    <script src="https://kit.fontawesome.com/b80f978b3a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="./images/logo(no_text).png" type="image/x-icon">
+    <link rel="stylesheet" href="stylesheets/post.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="javascripts/update_requests.js" defer></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <header class="header">
+    </header>
+
+    <main class="container" id="main-background">
+        <div class="middle-panel">
+            <!-- <div class="post create">
+                <div class="post-top">
+                    <textarea placeholder="Update Blog/News "></textarea>
+                </div>
+                <div class="post-area">
+                    <div class="privacy">
+                        <label for="privacy-select">Privacy:</label>
+                        <select id="privacy-select">
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
+                    <div class="action">
+                        <i class="fa fa-image"></i>
+                        <span>Upload Photo</span>
+                    </div>
+                    <button class="post_button" type="button">
+                        Post
+                    </button>
+                </div>
+                <div class="post-bottom"></div>
+            </div> -->
+
+            <div class="post" v-for="item in updateTable" v-bind:v-if="item.isPublic === 1">
+                <div class="post-top">
+                    <div class="post-info">
+                        <p class="name">{{ item.postTopic }}</p>
+                        <span class="time">{{ item.updateTS }}</span>
+                    </div>
+                    <!-- <i class="fa-solid fa-ellipsis" onclick="showDropdown(event)"></i>
+                    <div class="dropdown-content">
+                        <a href="#">Edit Post</a>
+                        <a href="#">Delete Post</a>
+                    </div> -->
+                </div>
+
+                <div class="post-content">
+                    <p>{{ item.postBody }}</p>
+                    <img src="images/post.jpg" alt="" />
+                </div>
+                <div class="post-bottom"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+    <!-- Footer section ended -->
+    <script src="javascripts/script.js"></script>
+    <script>
+        function showDropdown(event) {
+            event.stopPropagation();
+            var dropdown = event.target.nextElementSibling;
+            dropdown.classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.fa-ellipsis')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

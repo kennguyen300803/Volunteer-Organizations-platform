@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Page - NSW</title>
+    <script src="https://kit.fontawesome.com/b80f978b3a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="./images/logo(no_text).png" type="image/x-icon">
+    <link rel="stylesheet" href="stylesheets/events_page.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="javascripts/event_requests.js" defer></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <header class="header">
+    </header>
+
+    <div class="main">
+        <aside class="left">
+            <h2>Event RSVP</h2>
+            <ul>
+                <li><button class="public_btn" type="button" onclick="location.replace('/signin')">Sign in to RSVP</button></li>
+            </ul>
+        </aside>
+
+        <main class="main-background">
+            <!--banner section-->
+            <div class="banner"><h1 id="currentOrgBanner">Events:</h1></div>
+            <!--banner ended-->
+            <div class="big-box">
+                <div class="event-box" v-for="item in eventTable">
+                    <a href="#">
+                        <img src="images/event_post.jpg" alt="Event Image">
+                        <div class="event-details">
+                            <span>Date: {{ item.eventDate }}</span>
+                            <h3>{{ item.eventTitle }}</h3>
+                            <p>{{ item.eventDescription }}</p>
+                        </div>
+                    </a>
+                    <div class="event_button">
+                        <button class="interested-button" type="button" onclick="location.replace('/signin')">Sign in to RSVP</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Footer section -->
+    <footer id="footer">
+    </footer>
+    <!-- Footer section ended -->
+    <script src="javascripts/script.js"></script>
+</body>
+</html>

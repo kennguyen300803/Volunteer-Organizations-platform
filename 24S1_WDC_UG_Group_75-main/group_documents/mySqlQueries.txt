@@ -1,0 +1,50 @@
+﻿// words in square brackets [like this] indicate that you need to substitute a value in
+// what's written here may sometiems contradict the data plan because I thought it'd be better
+// idk how the hashing is handled so please take my password stuff with a grain of salt
+
+// NOT TESTED YET
+
+// input a userID
+User information:
+	is user manager or admin?: SELECT isManager, isAdmin FROM users WHERE users.userID = [inputUserID];
+	if admin - give every user's info: SELECT userID, email, firstName, lastName FROM users;
+	if manager - give the info of every managed user: SELECT users.userID, users.email, users.firstName, users.lastName FROM users INNER JOIN memberList ON users.userID = memberList.userID INNER JOIN organisations ON memberList.orgID = organisations.orgID WHERE organisations.managerID = [inputUserID];
+
+// input email, first and last name, and password
+// input userID
+User update:
+	overwrite old user details with new details: UPDATE users SET email = [newEmail], firstName = [newFirstName], lastName = [newLastName], password = [newPassword] WHERE userID = [inputUserID];
+
+//input email and password
+Log in:
+	retrieve matching user's userID: SELECT userID FROM users WHERE email = [inputEmail] AND password = [inputPassword];
+
+// input email, first and last name, password
+// input unique userID
+Sign up:
+	create new user: INSERT INTO users (email, firstName, lastName, password) VALUES ([inputEmail], [inputFirstName], [inputLastName], [inputPassword]);
+
+Management action:
+
+// input description, orgID to create event
+// input description, eventID, orgID to edit event
+create/update event:
+	create event: INSERT INTO events (eventDescription, orgID) VALUES ([inputDesc], [inputOrgID]);
+	update event: UPDATE events SET eventDescription = [inputDesc] WHERE eventID = [inputEventID] AND orgID = [inputOrgID];
+
+// input post topic, post body, orgID to create post
+// for now, I'm assuming that only the public status of an update can be changed
+// input isPublic?, updateID and orgID
+create/update post:
+	create update post: INSERT INTO updatePost (orgID, postTopic, postBody) VALUES ([inputOrgID], [inputTopic], [inputBody]);
+	edit update post: UPDATE updatePost SET isPublic = [inputPublic?] WHERE updateID = [inputUpdateID] AND ordID = [inputOrgID];
+
+// input user and event IDs
+RSVP to event:
+	create new RSVP: INSERT INTO rsvp (userID, eventID) VALUES ([inputUserID], [inputEventID]);
+
+events table:
+
+update feed:
+	if user not member of org - retrieve only updates that are marked public:
+	else - retrieve all updates in org:
